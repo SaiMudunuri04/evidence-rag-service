@@ -20,3 +20,20 @@ def test_ready_requires_documents(monkeypatch):
     monkeypatch.setenv("DOCUMENT_ROOT", "/does-not-exist")
     app.index.cache_clear()
     assert TestClient(app.app).get("/health/ready").status_code == 503
+
+
+def test_uncited_or_invalid_citations_abstain():
+    index = rag.BM25Index([{"source": "runbook.md", "offset": 0,
+                            "text": "Drain the queue before restarting the worker."}])
+
+    class UnreliableGenerator:
+        def __init__(self, response):
+            self.response = response
+
+        def complete(self, system, user):
+            return self.response
+
+    for response in ("Restart immediately.", "Restart immediately. [S99]"):
+        result = rag.answer("restart worker", index, UnreliableGenerator(response))
+        assert result["citation_check"] == "missing_or_invalid_ids"
+        assert result["answer"] == "I could not verify a cited answer from the retrieved sources."

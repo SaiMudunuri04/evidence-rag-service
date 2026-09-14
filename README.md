@@ -30,7 +30,7 @@ provision AWS or a cluster.
 
 ## Index and serve
 
-Mount approved `.md` or `.txt` files under `DOCUMENT_ROOT`. The service chunks text, builds a BM25 index, retrieves source passages, and requires the generator's response to cite retrieved source IDs. `citation_check` validates IDs; it is not a factual-entailment guarantee. Use a reviewed OpenAI-compatible inference endpoint over HTTPS or localhost.
+Mount approved `.md` or `.txt` files under `DOCUMENT_ROOT`. The service chunks text, builds a BM25 index, retrieves source passages, and requires the generator's response to cite retrieved source IDs. An answer with missing or invalid citation IDs is replaced with an abstention. `citation_check` validates IDs; it is not a factual-entailment guarantee. Use a reviewed OpenAI-compatible inference endpoint over HTTPS or localhost.
 
 ```sh
 DOCUMENT_ROOT=/path/to/documents LLM_BASE_URL=https://your-model.example/v1 LLM_MODEL=your-model uvicorn service.app:app --host 127.0.0.1

@@ -93,7 +93,8 @@ def answer(question: str, index: BM25Index, generator: Generator) -> dict:
     response = generator.complete(SYSTEM, prompt).strip()
     cited = {int(value) for value in re.findall(r"\[S(\d+)\]", response)}
     valid = bool(cited) and all(1 <= value <= len(passages) for value in cited)
-    return {"answer": response, "sources": [{"id": f"S{i}", **item}
+    return {"answer": response if valid else "I could not verify a cited answer from the retrieved sources.",
+            "sources": [{"id": f"S{i}", **item}
                                              for i, item in enumerate(passages, 1)],
             "citation_check": "valid_ids" if valid else "missing_or_invalid_ids"}
 
