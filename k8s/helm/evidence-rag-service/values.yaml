@@ -6,7 +6,7 @@ podLabels: {}
 podAnnotations: {}
 image:
   repository: ghcr.io/saimudunuri04/evidence-rag-service
-  tag: "e5992987438ec4b410999eec57fb8994106673e8"
+  tag: "b2c503a1968abd6bee9c7aaf358d1932e0b30535"
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 serviceAccount:
