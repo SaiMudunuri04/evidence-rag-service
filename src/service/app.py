@@ -8,9 +8,11 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from .llm import ChatClient
+from .observability import RequestLoggingMiddleware
 from .rag import BM25Index, answer, load_documents
 
 app = FastAPI(title="Evidence RAG", version="0.1.0")
+app.add_middleware(RequestLoggingMiddleware)
 
 
 class Question(BaseModel):

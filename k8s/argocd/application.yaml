@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/SaiMudunuri04/evidence-rag-service.git
     targetRevision: main
-    path: helm/chart
+    path: k8s/helm/evidence-rag-service
   destination:
     server: https://kubernetes.default.svc
     namespace: evidence-rag-service

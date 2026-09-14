@@ -12,7 +12,6 @@ from typing import Protocol
 
 from .llm import ChatClient
 
-
 TOKEN = re.compile(r"[a-z0-9]+")
 
 
