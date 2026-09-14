@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: ghcr.io/saimudunuri04/evidence-rag-service
-  tag: "62ee1c9a8acf09c931b506d36fd9b55b77738dd7"
+  tag: "e5992987438ec4b410999eec57fb8994106673e8"
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 service:
