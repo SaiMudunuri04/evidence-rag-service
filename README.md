@@ -7,6 +7,10 @@ a container, Helm release, Argo CD application, and a CI workflow that builds an
 immutable GHCR image after tests pass. It is a reference implementation; it has not
 been deployed to a user's AWS account or Kubernetes cluster.
 
+## Start here
+
+**Problem:** answer from retrieved documents while keeping evidence visible. **What this demonstrates:** BM25 retrieval, citation-ID validation, and abstention when generated text lacks valid source IDs. **Inspect first:** [`docs/architecture.md`](docs/architecture.md), [`src/service/app.py`](src/service/app.py), and the citation tests.
+
 ## Run
 
 ```sh
