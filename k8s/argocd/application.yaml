@@ -1,3 +1,30 @@
+# -----------------------------------------------------------------------------
+# Argo CD Application: evidence-rag-service
+#
+# GitOps wiring for the single Helm chart at k8s/helm/evidence-rag-service.
+#
+# Placeholders / fields to review when installing into a new environment:
+#   spec.project              -> Argo CD project scoping this app ("default" here)
+#   spec.source.repoURL       -> Git repo holding this manifest and the chart
+#   spec.source.targetRevision-> Git revision Argo CD tracks ("main" here; a tag
+#                                is safer for production)
+#   spec.source.path          -> chart path inside the repo
+#   spec.destination.server   -> target cluster API server
+#                                ("https://kubernetes.default.svc" = in-cluster)
+#   spec.destination.namespace-> target namespace; CreateNamespace=true lets
+#                                Argo CD create it on first sync
+#
+# GitOps flow:
+#   push to main -> GitHub Actions CI runs pytest + ruff + helm lint/template,
+#   then builds and pushes ghcr.io/saimudunuri04/evidence-rag-service:<sha>,
+#   pins that tag in the chart's values.yaml, and commits it back -> Argo CD
+#   detects the change and auto-syncs (prune + selfHeal) the new image.
+#
+# NOTE: manifests were validated with `helm lint --strict`, `helm template`, and
+# client-side YAML structure checks only; they have NOT been applied to a live
+# cluster. Provide the LLM_API_KEY Secret and mount documents out of band
+# before the first sync.
+# -----------------------------------------------------------------------------
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

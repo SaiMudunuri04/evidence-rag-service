@@ -76,5 +76,13 @@ networkPolicy:
   egressTo: []
 env: {}
 envFromSecretName: ""
+# Non-secret runtime configuration delivered as env vars via a ConfigMap.
+# The path must match the document volume mounted into the pod
+# (see `volumes`/`volumeMounts`). Secrets (LLM_API_KEY) stay out of here;
+# wire them via `envFromSecretName`.
+config:
+  enabled: true
+  data:
+    DOCUMENT_ROOT: "/data/documents"
 volumeMounts: []
 volumes: []
